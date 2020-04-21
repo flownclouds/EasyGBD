@@ -34,13 +34,6 @@ EasyGBD项目依赖1个TSINGSEE青犀开放平台的Git工程：
 	chmod +x Builtit
 		
 
-## 工作流程 ##
- 
-![EasyPusher Work Flow](http://www.easydarwin.org/github/images/easyrtmp/easyrtmp_workfolw.png)
-
-
-## 调用过程 ##
-![EasyGBD](http://www.easydarwin.org/skin/easydarwin/images/easyrtmp20161101.png)
 
 
 ## 调用示例 ##
