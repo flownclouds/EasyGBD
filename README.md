@@ -2,6 +2,7 @@
 
 EasyGBD是[TSINGSEE青犀开放平台](http://open.tsingsee.com "TSINGSEE青犀开放平台")开发的一套客户端软件模拟IPC功能组件，可以注册到支持GB28181协议的服务器上，并且响应服务器发来的Invite指令进行实时流发送，其中视频源可以是本地文件、桌面、模拟相机等，全平台支持;
 
+
 ### 调用方法 ###
 
 - **EasyGBD_HIK**：EasyGBD通过海康SDK取流，并进行转化，再注册到GB28181流媒体服务器；
@@ -33,8 +34,18 @@ EasyGBD项目依赖1个TSINGSEE青犀开放平台的Git工程：
 	Linux下执行Builtit文件编译,具体如下：
 	chmod +x Builtit
 		
+### 支持 ###
 
-
+	Support GB28181 2016 version
+	Support H264 PS package
+	Support audio talk
+	Support subscription, notification function
+	Support recording playback
+	Support recording download
+	Support audio broadcast
+	Support cross-platform compilation
+	Small target file size
+	Suitable for embedded device development
 
 ## 调用示例 ##
 
