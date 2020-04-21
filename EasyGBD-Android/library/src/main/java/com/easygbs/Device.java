@@ -1,11 +1,15 @@
 package com.easygbs;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.easydarwin.push.Pusher;
 import org.easydarwin.util.SIP;
 
 public class Device implements Pusher {
+
+    private static String ip;
+    private static int port;
 
     public static final int VIDEO_CODEC_NONE = 0;
     public static final int VIDEO_CODEC_H264 = 1;
@@ -20,6 +24,7 @@ public class Device implements Pusher {
     public static final int AUDIO_CODEC_AAC = 4;
     public static final int AUDIO_CODEC_G722 = 5;
     public static final int AUDIO_CODEC_OPUS = 6;
+    public static final int AUDIO_CODEC_PCM = 7;
 
     private boolean pushed = false;
 
@@ -63,7 +68,7 @@ public class Device implements Pusher {
      */
     public native int pushVideo(byte[] buffer, int frameSize, int keyframe);
 
-    public native int pushAudio(byte[] buffer, int frameSize, int nbSamples);
+    public native int pushAudio(int format, byte[] buffer, int frameSize, int nbSamples);
 
     public native int release();
 
@@ -72,6 +77,9 @@ public class Device implements Pusher {
         if (sip == null) {
             return;
         }
+
+        ip = sip.getServerIp();
+        port = sip.getServerPort();
 
         create(sip.getServerIp(),
                 sip.getServerPort(),
@@ -107,7 +115,8 @@ public class Device implements Pusher {
     @Override
     public void pushA(byte[] buffer, int length, int nbSamples) {
         if (pushed) {
-            pushAudio(buffer, length, nbSamples);
+            int res = pushAudio(AUDIO_CODEC_PCM, buffer, length, length);
+            Log.i("AAA", res + " >>> " + length);
         }
     }
 
@@ -151,19 +160,19 @@ public class Device implements Pusher {
                 String res;
                 switch (code) {
                     case GB28181_DEVICE_EVENT_CONNECTING:
-                        res = "连接中";
+                        res = "连接中：" + ip + ":" + port;
                         break;
                     case GB28181_DEVICE_EVENT_REGISTER_ING:
-                        res = "注册中";
+                        res = "注册中：" + ip + ":" + port;
                         break;
                     case GB28181_DEVICE_EVENT_REGISTER_OK:
-                        res = "注册成功";
+                        res = "注册成功：" + ip + ":" + port;
                         break;
                     case GB28181_DEVICE_EVENT_REGISTER_AUTH_FAIL:
-                        res = "注册鉴权失败";
+                        res = "注册鉴权失败：" + ip + ":" + port;
                         break;
                     case GB28181_DEVICE_EVENT_START_VIDEO:
-                        res = "开始视频";
+                        res = "开始视频：H264+G711U";
                         break;
                     case GB28181_DEVICE_EVENT_STOP_VIDEO:
                         res = "停止视频";
@@ -172,7 +181,7 @@ public class Device implements Pusher {
                         res = "对讲发过来的音频数据";
                         break;
                     case GB28181_DEVICE_EVENT_DISCONNECT:
-                        res = "已断线";
+                        res = "已断线：" + ip + ":" + port;
                         break;
                     default:
                         res = "";
