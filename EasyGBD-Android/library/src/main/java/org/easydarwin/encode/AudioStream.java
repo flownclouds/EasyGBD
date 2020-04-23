@@ -5,6 +5,7 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Process;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.easygbs.Device;
@@ -59,7 +60,12 @@ public class AudioStream {
             }
 
             if (pusher != null) {
-                pusher.setAFormat(Device.AUDIO_CODEC_G711U, samplingRate, 1, 16);
+                boolean key = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("key-aac-codec", false);
+                if (key) {
+                    pusher.setAFormat(Device.AUDIO_CODEC_AAC, samplingRate, 1, 16);
+                } else {
+                    pusher.setAFormat(Device.AUDIO_CODEC_G711U, samplingRate, 1, 16);
+                }
             }
 
             sets.add(pusher);
@@ -133,8 +139,7 @@ public class AudioStream {
 
                     while (mThread != null) {
                         byte[] bytes = new byte[bufferSize];
-                        len = mAudioRecord.read(bytes, 0, bytes.length);
-                        Log.i("AAA", "len：" + len);
+                        mAudioRecord.read(bytes, 0, bytes.length);
 
                         Collection<Pusher> p;
                         synchronized (AudioStream.this) {

@@ -1,7 +1,6 @@
 package com.easygbs;
 
 import android.content.Context;
-import android.util.Log;
 
 import org.easydarwin.push.Pusher;
 import org.easydarwin.util.SIP;
@@ -10,6 +9,7 @@ public class Device implements Pusher {
 
     private static String ip;
     private static int port;
+    private static int codec;
 
     public static final int VIDEO_CODEC_NONE = 0;
     public static final int VIDEO_CODEC_H264 = 1;
@@ -102,6 +102,7 @@ public class Device implements Pusher {
 
     @Override
     public void setAFormat(int codec, int sampleRate, int channels, int bitPerSamples) {
+        this.codec = codec;
         setAudioFormat(codec, sampleRate, channels, bitPerSamples);
     }
 
@@ -115,8 +116,7 @@ public class Device implements Pusher {
     @Override
     public void pushA(byte[] buffer, int length, int nbSamples) {
         if (pushed) {
-            int res = pushAudio(AUDIO_CODEC_PCM, buffer, length, length);
-            Log.i("AAA", res + " >>> " + length);
+            pushAudio(AUDIO_CODEC_PCM, buffer, length, length);
         }
     }
 
@@ -171,9 +171,14 @@ public class Device implements Pusher {
                     case GB28181_DEVICE_EVENT_REGISTER_AUTH_FAIL:
                         res = "注册鉴权失败：" + ip + ":" + port;
                         break;
-                    case GB28181_DEVICE_EVENT_START_VIDEO:
-                        res = "开始视频：H264+G711U";
+                    case GB28181_DEVICE_EVENT_START_VIDEO: {
+                        if (codec == AUDIO_CODEC_G711U) {
+                            res = "开始视频：H264+G711U";
+                        } else {
+                            res = "开始视频：H264+AAC";
+                        }
                         break;
+                    }
                     case GB28181_DEVICE_EVENT_STOP_VIDEO:
                         res = "停止视频";
                         break;

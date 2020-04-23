@@ -38,6 +38,21 @@ public class SPUtil {
                 .apply();
     }
 
+    /* ============================ 使能AAC编码 ============================ */
+    private static final String KEY_AAC_CODEC = "key-aac-codec";
+
+    public static boolean getAACCodec(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(KEY_AAC_CODEC, false);
+    }
+
+    public static void setAACCodec(Context context, boolean isChecked) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putBoolean(KEY_AAC_CODEC, isChecked)
+                .apply();
+    }
+
     /* ============================ 叠加水印 ============================ */
     private static final String KEY_ENABLE_VIDEO_OVERLAY = "key_enable_video_overlay";
 

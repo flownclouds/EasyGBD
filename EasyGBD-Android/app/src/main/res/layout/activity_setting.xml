@@ -398,6 +398,33 @@
                     android:checked="false"
                     android:text="使能H.265编码" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="5dp"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="EasyGBS默认使用G.711编码推送音频。如果需要测试AAC编码，请勾选下面的单选框。" />
+
+                <CheckBox
+                    android:id="@+id/enable_aac"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:checked="false"
+                    android:text="AAC编码" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="5dp"
+                    android:background="?android:attr/listDivider" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -411,7 +438,6 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="使用软编码" />
-
 
                 <View
                     android:layout_width="match_parent"

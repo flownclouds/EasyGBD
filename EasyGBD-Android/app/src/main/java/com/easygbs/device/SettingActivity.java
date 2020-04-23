@@ -126,6 +126,13 @@ public class SettingActivity extends AppCompatActivity implements Toolbar.OnMenu
                 (buttonView, isChecked) -> SPUtil.setHevcCodec(this, isChecked)
         );
 
+        // 使能H.265编码
+        CheckBox enable_aac_cb = findViewById(R.id.enable_aac);
+        enable_aac_cb.setChecked(SPUtil.getAACCodec(this));
+        enable_aac_cb.setOnCheckedChangeListener(
+                (buttonView, isChecked) -> SPUtil.setAACCodec(this, isChecked)
+        );
+
         // 叠加水印
         CheckBox enable_video_overlay = findViewById(R.id.enable_video_overlay);
         enable_video_overlay.setChecked(SPUtil.getEnableVideoOverlay(this));

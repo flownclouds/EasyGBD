@@ -31,8 +31,8 @@ public class DataUtil {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(EasyApplication.getEasyApplication());
 
         SIP sip = new SIP();
-        sip.setServerIp(sp.getString("serverIp", "172.81.216.155"));
-        sip.setServerPort(sp.getInt("serverPort", 15060));
+        sip.setServerIp(sp.getString("serverIp", "demo.easygbs.com:10000"));
+        sip.setServerPort(sp.getInt("serverPort", 5060));
         sip.setServerId(sp.getString("serverId", "34020000002000000001"));
         sip.setServerDomain(sp.getString("serverDomain", "3402000000"));
         sip.setDeviceId(sp.getString("deviceId", "34020000001110005555"));
