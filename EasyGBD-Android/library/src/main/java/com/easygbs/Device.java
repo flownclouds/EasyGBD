@@ -1,6 +1,7 @@
 package com.easygbs;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.easydarwin.push.Pusher;
 import org.easydarwin.util.SIP;
@@ -9,7 +10,6 @@ public class Device implements Pusher {
 
     private static String ip;
     private static int port;
-    private static int codec;
 
     public static final int VIDEO_CODEC_NONE = 0;
     public static final int VIDEO_CODEC_H264 = 1;
@@ -27,6 +27,16 @@ public class Device implements Pusher {
     public static final int AUDIO_CODEC_PCM = 7;
 
     private boolean pushed = false;
+
+    private int videoCodec;
+    private int width;
+    private int height;
+    private int frameRate;
+
+    private int audioCodec;
+    private int sampleRate;
+    private int channels;
+    private int bitPerSamples;
 
     static {
         System.loadLibrary("EasyGBSDevice");
@@ -92,18 +102,27 @@ public class Device implements Pusher {
                 sip.getRegExpires(),
                 sip.getHeartbeatInterval(),
                 sip.getHeartbeatCount());
+
+        setVideoFormat(videoCodec, width, height, frameRate);
+        setAudioFormat(audioCodec, sampleRate, channels, bitPerSamples);
+
         pushed = true;
     }
 
     @Override
     public void setVFormat(int codec, int width, int height, int frameRate) {
-        setVideoFormat(codec, width, height, frameRate);
+        this.videoCodec = codec;
+        this.width = width;
+        this.height = height;
+        this.frameRate = frameRate;
     }
 
     @Override
     public void setAFormat(int codec, int sampleRate, int channels, int bitPerSamples) {
-        this.codec = codec;
-        setAudioFormat(codec, sampleRate, channels, bitPerSamples);
+        this.audioCodec = codec;
+        this.sampleRate = sampleRate;
+        this.channels = channels;
+        this.bitPerSamples = bitPerSamples;
     }
 
     @Override
@@ -116,7 +135,8 @@ public class Device implements Pusher {
     @Override
     public void pushA(byte[] buffer, int length, int nbSamples) {
         if (pushed) {
-            pushAudio(AUDIO_CODEC_PCM, buffer, length, length);
+            int res = pushAudio(AUDIO_CODEC_PCM, buffer, length, length);
+            Log.i("AAA", res + " >>> " + length);
         }
     }
 
@@ -171,14 +191,9 @@ public class Device implements Pusher {
                     case GB28181_DEVICE_EVENT_REGISTER_AUTH_FAIL:
                         res = "注册鉴权失败：" + ip + ":" + port;
                         break;
-                    case GB28181_DEVICE_EVENT_START_VIDEO: {
-                        if (codec == AUDIO_CODEC_G711U) {
-                            res = "开始视频：H264+G711U";
-                        } else {
-                            res = "开始视频：H264+AAC";
-                        }
+                    case GB28181_DEVICE_EVENT_START_VIDEO:
+                        res = "开始视频：H264+G711U";
                         break;
-                    }
                     case GB28181_DEVICE_EVENT_STOP_VIDEO:
                         res = "停止视频";
                         break;

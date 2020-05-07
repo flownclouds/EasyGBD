@@ -8,16 +8,16 @@ android {
         applicationId "com.easygbs.device"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 10200421
-        versionName '1.0.20.0421'
+        versionCode 10200507
+        versionName '1.0.20.0507'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
         flavorDimensions "versionCode"
 
-        if (project.hasProperty('RTMP_KEY')) {
-            println("RTMPKEY IS :" + RTMP_KEY)
-            buildConfigField 'String', 'RTMP_KEY', RTMP_KEY
+        if (project.hasProperty('GBS_KEY')) {
+            println("GBSKEY IS :" + GBS_KEY)
+            buildConfigField 'String', 'GBS_KEY', GBS_KEY
         } else {
-            println("NO RTMPKEY FOUND")
+            println("NO GBSKEY FOUND")
 
             /*
             *本Key为临时授权License，如需商业使用，请邮件至support@easydss.com了解此产品的授权信息。
