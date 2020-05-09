@@ -5,8 +5,6 @@ EasyGBD是[TSINGSEE青犀开放平台](http://open.tsingsee.com "TSINGSEE青犀�
 
 ### 调用方法 ###
 
-- **EasyGBD_HIK**：EasyGBD通过海康SDK取流，并进行转化，再注册到GB28181流媒体服务器；
-
 - **EasyGBD-Android**：Android安卓GB28181，采集安卓手机前/后摄像头、麦克风音视频注册到GB28181流媒体服务器；项目地址：[https://github.com/tsingsee/EasyGBD](https://github.com/tsingsee/EasyGBD)
 
 <!--- **EasyGBD-iOS**：iOS苹果RTMP直播推流，采集苹果手机前/后摄像头、麦克风音视频注册到GB28181流媒体服务器；项目地址：[https://github.com/tsingsee/EasyGBD-iOS](https://github.com/tsingsee/EasyGBD-iOS "EasyGBD-iOS")
