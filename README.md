@@ -25,7 +25,6 @@ EasyGBD项目依赖1个TSINGSEE青犀开放平台的Git工程：
 	/Include/
 	
 
-
 ### 编译方法 ###
 
 	Windows平台采用Visual Studio 2010编译sln
