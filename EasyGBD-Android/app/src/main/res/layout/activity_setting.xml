@@ -369,46 +369,47 @@
 
                 </LinearLayout>
 
-                <CheckBox
-                    android:id="@+id/enable_background_camera_pushing"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:checked="false"
-                    android:text="使能摄像头后台采集" />
+                <!--<CheckBox-->
+                    <!--android:id="@+id/enable_background_camera_pushing"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:checked="false"-->
+                    <!--android:text="使能摄像头后台采集" />-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="5dp"
-                    android:background="?android:attr/listDivider" />
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_marginVertical="5dp"-->
+                    <!--android:background="?android:attr/listDivider" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:paddingLeft="5dp"-->
+                    <!--android:paddingRight="5dp"-->
+                    <!--android:text="EasyGBS默认使用H.264格式来编码视频。如果需要使用H.265，请勾选下面的单选框。\n注：H.265可能在某些设备上不支持，这种情况下会自动切换为H.264格式" />-->
+
+                <!--<CheckBox-->
+                    <!--android:id="@+id/enable_hevc"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginBottom="8dp"-->
+                    <!--android:checked="false"-->
+                    <!--android:text="使能H.265编码" />-->
+
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_marginVertical="5dp"-->
+                    <!--android:background="?android:attr/listDivider" />-->
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:text="EasyGBS默认使用H.264格式来编码视频。如果需要使用H.265，请勾选下面的单选框。\n注：H.265可能在某些设备上不支持，这种情况下会自动切换为H.264格式" />
-
-                <CheckBox
-                    android:id="@+id/enable_hevc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:checked="false"
-                    android:text="使能H.265编码" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="5dp"
-                    android:background="?android:attr/listDivider" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
+                    android:layout_marginTop="20dp"
                     android:text="EasyGBS默认使用G.711编码推送音频。如果需要测试AAC编码，请勾选下面的单选框。" />
 
                 <CheckBox

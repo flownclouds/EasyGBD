@@ -71,46 +71,46 @@ public class SettingActivity extends AppCompatActivity implements Toolbar.OnMenu
             binding.sipProtocolTcp.setChecked(true);
         }
 
-        // 使能摄像头后台采集
-        CheckBox backgroundPushing = (CheckBox) findViewById(R.id.enable_background_camera_pushing);
-        backgroundPushing.setChecked(SPUtil.getEnableBackgroundCamera(this));
-        backgroundPushing.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(final CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (Settings.canDrawOverlays(SettingActivity.this)) {
-                            SPUtil.setEnableBackgroundCamera(SettingActivity.this, true);
-                        } else {
-                            new AlertDialog
-                                    .Builder(SettingActivity.this)
-                                    .setTitle("后台上传视频")
-                                    .setMessage("后台上传视频需要APP出现在顶部.是否确定?")
-                                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            // 在Android 6.0后，Android需要动态获取权限，若没有权限，提示获取.
-                                            final Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + BuildConfig.APPLICATION_ID));
-                                            startActivityForResult(intent, REQUEST_OVERLAY_PERMISSION);
-                                        }
-                                    }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            SPUtil.setEnableBackgroundCamera(SettingActivity.this, false);
-                                            buttonView.toggle();
-                                        }
-                                    })
-                                    .setCancelable(false)
-                                    .show();
-                        }
-                    } else {
-                        SPUtil.setEnableBackgroundCamera(SettingActivity.this, true);
-                    }
-                } else {
-                    SPUtil.setEnableBackgroundCamera(SettingActivity.this, false);
-                }
-            }
-        });
+//        // 使能摄像头后台采集
+//        CheckBox backgroundPushing = (CheckBox) findViewById(R.id.enable_background_camera_pushing);
+//        backgroundPushing.setChecked(SPUtil.getEnableBackgroundCamera(this));
+//        backgroundPushing.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(final CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                        if (Settings.canDrawOverlays(SettingActivity.this)) {
+//                            SPUtil.setEnableBackgroundCamera(SettingActivity.this, true);
+//                        } else {
+//                            new AlertDialog
+//                                    .Builder(SettingActivity.this)
+//                                    .setTitle("后台上传视频")
+//                                    .setMessage("后台上传视频需要APP出现在顶部.是否确定?")
+//                                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialogInterface, int i) {
+//                                            // 在Android 6.0后，Android需要动态获取权限，若没有权限，提示获取.
+//                                            final Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + BuildConfig.APPLICATION_ID));
+//                                            startActivityForResult(intent, REQUEST_OVERLAY_PERMISSION);
+//                                        }
+//                                    }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialogInterface, int i) {
+//                                            SPUtil.setEnableBackgroundCamera(SettingActivity.this, false);
+//                                            buttonView.toggle();
+//                                        }
+//                                    })
+//                                    .setCancelable(false)
+//                                    .show();
+//                        }
+//                    } else {
+//                        SPUtil.setEnableBackgroundCamera(SettingActivity.this, true);
+//                    }
+//                } else {
+//                    SPUtil.setEnableBackgroundCamera(SettingActivity.this, false);
+//                }
+//            }
+//        });
 
         // 是否使用软编码
         CheckBox x264enc = findViewById(R.id.use_x264_encode);
@@ -119,12 +119,12 @@ public class SettingActivity extends AppCompatActivity implements Toolbar.OnMenu
                 (buttonView, isChecked) -> SPUtil.setswCodec(this, isChecked)
         );
 
-        // 使能H.265编码
-        CheckBox enable_hevc_cb = findViewById(R.id.enable_hevc);
-        enable_hevc_cb.setChecked(SPUtil.getHevcCodec(this));
-        enable_hevc_cb.setOnCheckedChangeListener(
-                (buttonView, isChecked) -> SPUtil.setHevcCodec(this, isChecked)
-        );
+//        // 使能H.265编码
+//        CheckBox enable_hevc_cb = findViewById(R.id.enable_hevc);
+//        enable_hevc_cb.setChecked(SPUtil.getHevcCodec(this));
+//        enable_hevc_cb.setOnCheckedChangeListener(
+//                (buttonView, isChecked) -> SPUtil.setHevcCodec(this, isChecked)
+//        );
 
         // 使能H.265编码
         CheckBox enable_aac_cb = findViewById(R.id.enable_aac);
@@ -241,17 +241,17 @@ public class SettingActivity extends AppCompatActivity implements Toolbar.OnMenu
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_OVERLAY_PERMISSION) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                boolean canDraw = Settings.canDrawOverlays(this);
-                SPUtil.setEnableBackgroundCamera(SettingActivity.this, canDraw);
-
-                if (!canDraw) {
-                    CheckBox backgroundPushing = (CheckBox) findViewById(R.id.enable_background_camera_pushing);
-                    backgroundPushing.setChecked(false);
-                }
-            }
-        }
+//        if (requestCode == REQUEST_OVERLAY_PERMISSION) {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                boolean canDraw = Settings.canDrawOverlays(this);
+//                SPUtil.setEnableBackgroundCamera(SettingActivity.this, canDraw);
+//
+//                if (!canDraw) {
+//                    CheckBox backgroundPushing = (CheckBox) findViewById(R.id.enable_background_camera_pushing);
+//                    backgroundPushing.setChecked(false);
+//                }
+//            }
+//        }
     }
 
     @Override

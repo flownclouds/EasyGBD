@@ -83,20 +83,20 @@ public class SPUtil {
                  .apply();
     }
 
-    /* ============================ 使能摄像头后台采集 ============================ */
-    private static final String KEY_ENABLE_BACKGROUND_CAMERA = "key_enable_background_camera";
-
-    public static boolean getEnableBackgroundCamera(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(KEY_ENABLE_BACKGROUND_CAMERA, false);
-    }
-
-    public static void setEnableBackgroundCamera(Context context, boolean value) {
-        PreferenceManager.getDefaultSharedPreferences(context)
-                .edit()
-                .putBoolean(KEY_ENABLE_BACKGROUND_CAMERA, value)
-                .apply();
-    }
+//    /* ============================ 使能摄像头后台采集 ============================ */
+//    private static final String KEY_ENABLE_BACKGROUND_CAMERA = "key_enable_background_camera";
+//
+//    public static boolean getEnableBackgroundCamera(Context context) {
+//        return PreferenceManager.getDefaultSharedPreferences(context)
+//                .getBoolean(KEY_ENABLE_BACKGROUND_CAMERA, false);
+//    }
+//
+//    public static void setEnableBackgroundCamera(Context context, boolean value) {
+//        PreferenceManager.getDefaultSharedPreferences(context)
+//                .edit()
+//                .putBoolean(KEY_ENABLE_BACKGROUND_CAMERA, value)
+//                .apply();
+//    }
 
     /* ============================ 推送视频 ============================ */
     private static final String KEY_ENABLE_VIDEO = "key-enable-video";

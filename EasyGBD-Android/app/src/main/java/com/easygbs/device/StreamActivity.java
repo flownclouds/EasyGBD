@@ -165,16 +165,16 @@ public class StreamActivity extends AppCompatActivity implements View.OnClickLis
         if (mMediaStream != null) {
             mMediaStream.stopPreview();
 
-            if (isStreaming && SPUtil.getEnableBackgroundCamera(this)) {
-                mService.activePreview();
-            } else {
+//            if (isStreaming && SPUtil.getEnableBackgroundCamera(this)) {
+//                mService.activePreview();
+//            } else {
                 mMediaStream.stopStream();
                 mMediaStream.release();
                 mMediaStream = null;
 
                 stopService(new Intent(this, BackgroundCameraService.class));
                 stopService(new Intent(this, UVCCameraService.class));
-            }
+//            }
         }
 
         super.onPause();
@@ -297,10 +297,10 @@ public class StreamActivity extends AppCompatActivity implements View.OnClickLis
 
             mMediaStream = ms;
 
-            if (ms.isStreaming()) {
-                sendMessage("推流中");
-                startPush.setImageResource(R.drawable.start_push_pressed);
-            }
+//            if (ms.isStreaming()) {
+//                sendMessage("推流中");
+//                startPush.setImageResource(R.drawable.start_push_pressed);
+//            }
 
             if (ms.getDisplayRotationDegree() != getDisplayRotationDegree()) {
                 int orientation = getRequestedOrientation();
@@ -319,6 +319,7 @@ public class StreamActivity extends AppCompatActivity implements View.OnClickLis
             mMediaStream = ms;
 
             startCamera();
+            sendMessage("");
 
             mService.setMediaStream(ms);
         }
@@ -330,9 +331,9 @@ public class StreamActivity extends AppCompatActivity implements View.OnClickLis
         mMediaStream.createCamera();
         mMediaStream.startPreview();
 
-        if (mMediaStream.isStreaming()) {
-            sendMessage("推流中");
-        }
+//        if (mMediaStream.isStreaming()) {
+//            sendMessage("推流中");
+//        }
     }
 
     // 屏幕的角度
@@ -523,24 +524,24 @@ public class StreamActivity extends AppCompatActivity implements View.OnClickLis
 //        } else {
 //            super.onBackPressed();
 //        }
-
-        boolean isStreaming = mMediaStream != null && mMediaStream.isStreaming();
-
-        if (isStreaming && SPUtil.getEnableBackgroundCamera(this)) {
-            new AlertDialog.Builder(this).setTitle("是否允许后台上传？")
-                    .setMessage("您设置了使能摄像头后台采集,是否继续在后台采集并上传视频？如果是，记得直播结束后,再回来这里关闭直播。")
-                    .setNeutralButton("后台采集", (dialogInterface, i) -> {
-                        StreamActivity.super.onBackPressed();
-                    })
-                    .setPositiveButton("退出程序", (dialogInterface, i) -> {
-                        mMediaStream.stopStream();
-                        StreamActivity.super.onBackPressed();
-                        Toast.makeText(StreamActivity.this, "程序已退出。", Toast.LENGTH_SHORT).show();
-                    })
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .show();
-            return;
-        }
+//
+//        boolean isStreaming = mMediaStream != null && mMediaStream.isStreaming();
+//
+//        if (isStreaming && SPUtil.getEnableBackgroundCamera(this)) {
+//            new AlertDialog.Builder(this).setTitle("是否允许后台上传？")
+//                    .setMessage("您设置了使能摄像头后台采集,是否继续在后台采集并上传视频？如果是，记得直播结束后,再回来这里关闭直播。")
+//                    .setNeutralButton("后台采集", (dialogInterface, i) -> {
+//                        StreamActivity.super.onBackPressed();
+//                    })
+//                    .setPositiveButton("退出程序", (dialogInterface, i) -> {
+//                        mMediaStream.stopStream();
+//                        StreamActivity.super.onBackPressed();
+//                        Toast.makeText(StreamActivity.this, "程序已退出。", Toast.LENGTH_SHORT).show();
+//                    })
+//                    .setNegativeButton(android.R.string.cancel, null)
+//                    .show();
+//            return;
+//        }
 
         //与上次点击返回键时刻作差
         if ((System.currentTimeMillis() - mExitTime) > 2000) {
@@ -564,7 +565,9 @@ public class StreamActivity extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
             case R.id.btn_switchCamera:
-                mMediaStream.switchCamera();
+                if (!mMediaStream.isStreaming()) {
+                    mMediaStream.switchCamera();
+                }
                 break;
         }
     }
@@ -685,6 +688,9 @@ public class StreamActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    /**
+     * 状态的回调
+     * */
     @Subscribe
     public void onPushCallback(final PushCallback cb) {
         sendMessage(cb.getName());
