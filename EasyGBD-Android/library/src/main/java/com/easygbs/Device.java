@@ -128,7 +128,8 @@ public class Device implements Pusher {
     @Override
     public void pushV(byte[] buffer, int length, int keyframe) {
         if (pushed) {
-            pushVideo(buffer, length, keyframe);
+            int res = pushVideo(buffer, length, keyframe);
+            Log.i("AAA", "Video：" + res + " >>> " + length);
         }
     }
 
@@ -136,7 +137,7 @@ public class Device implements Pusher {
     public void pushA(byte[] buffer, int length, int nbSamples) {
         if (pushed) {
             int res = pushAudio(AUDIO_CODEC_PCM, buffer, length, length);
-            Log.i("AAA", res + " >>> " + length);
+            Log.i("AAA", "Audio：" + res + " >>> " + length);
         }
     }
 
