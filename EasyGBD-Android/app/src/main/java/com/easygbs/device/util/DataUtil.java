@@ -37,7 +37,7 @@ public class DataUtil {
         sip.setServerDomain(sp.getString("serverDomain", "3402000000"));
         sip.setDeviceId(sp.getString("deviceId", "34020000001110005555"));
         sip.setChannelId(sp.getString("channelId", "34020000001310005555"));
-        sip.setPassword(sp.getString("password", "23456789"));
+        sip.setPassword(sp.getString("password", "12345678"));
         sip.setProtocol(sp.getInt("protocol", 0));
         sip.setRegExpires(sp.getInt("regExpires", 3600));
         sip.setHeartbeatInterval(sp.getInt("heartbeatInterval", 30));
