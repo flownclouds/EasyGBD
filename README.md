@@ -49,7 +49,7 @@ EasyGBD项目依赖1个TSINGSEE青犀开放平台的Git工程：
 
 - EasyGBD Android：支持前/后摄像头直播、安卓屏幕直播
 
-	[http://d.alphaqr.com/easygbd](http://d.alphaqr.com/easygbd "http://d.alphaqr.com/easygbd")
+	[http://app.tsingsee.com/easygbd](http://app.tsingsee.com/easygbd "http://app.tsingsee.com/easygbd")
 
 	<!--
 	![EasyGBD Android](http://www.easydarwin.org/github/images/easyrtmpfirim20170409.png)
