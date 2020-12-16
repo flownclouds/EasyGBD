@@ -1,14 +1,12 @@
 ## EasyGBD ##
 
-EasyGBD是[TSINGSEE青犀开放平台](http://open.tsingsee.com "TSINGSEE青犀开放平台")开发的一套客户端软件模拟IPC功能组件，可以注册到支持GB28181协议的服务器上，并且响应服务器发来的Invite指令进行实时流发送，其中视频源可以是本地文件、桌面、模拟相机等，全平台支持;
+EasyGBD是[TSINGSEE青犀开放平台](http://open.tsingsee.com "TSINGSEE青犀开放平台")开发的一套国标GB/T28181设备端功能组件，EasyGBD是GB/T28181 Device的简称，是国标GB28181协议的设备端，EasyGBD支持Windows、Linux、Android、iOS、ARM全部平台，EasyGBD兼容国标GB28181-2011、GB28181-2016全部功能。
 
 
 ### 调用方法 ###
 
 - **EasyGBD-Android**：Android安卓GB28181，采集安卓手机前/后摄像头、麦克风音视频注册到GB28181流媒体服务器；项目地址：[https://github.com/tsingsee/EasyGBD](https://github.com/tsingsee/EasyGBD)
 
-<!--- **EasyGBD-iOS**：iOS苹果RTMP直播推流，采集苹果手机前/后摄像头、麦克风音视频注册到GB28181流媒体服务器；项目地址：[https://github.com/tsingsee/EasyGBD-iOS](https://github.com/tsingsee/EasyGBD-iOS "EasyGBD-iOS")
--->
 
 > 我们在公网部署了一台演示的GB28181高性能流媒体服务器系统：[http://demo.easygbs.com](http://demo.easygbs.com "GB28181流媒体服务器") ，支持国标设备接入、级联、服务端录像、检索、回放等功能；
 
@@ -51,17 +49,6 @@ EasyGBD项目依赖1个TSINGSEE青犀开放平台的Git工程：
 
 	[http://app.tsingsee.com/easygbd](http://app.tsingsee.com/easygbd "http://app.tsingsee.com/easygbd")
 
-	<!--
-	![EasyGBD Android](http://www.easydarwin.org/github/images/easyrtmpfirim20170409.png)
-	-->
-
-<!--
-- EasyGBD iOS：支持前/后摄像头直播
-
-	[https://itunes.apple.com/us/app/easyrtmp/id1222410811?mt=8](https://itunes.apple.com/us/app/easyrtmp/id1222410811?mt=8 "EasyGBD_iOS")
-
-	![](http://www.easydarwin.org/github/images/easyrtmpios20170409.png)
--->
 
 ## 技术支持 ##
 
@@ -69,10 +56,6 @@ EasyGBD项目依赖1个TSINGSEE青犀开放平台的Git工程：
 
 - QQ交流群：<a href="https://jq.qq.com/?_wv=1027&k=e0ikkIIW" title="EasyGBD" target="_blank">**538316953**</a>
 
-> EasyGBD是一款非常稳定的GB28181设备组件，各平台版本需要经过授权才能商业使用，商业授权方案可以通过以上渠道进行更深入的技术与合作咨询；
-
-
-<br/>
 
 ### ✈ 更多视频解决方案资源汇总
 
