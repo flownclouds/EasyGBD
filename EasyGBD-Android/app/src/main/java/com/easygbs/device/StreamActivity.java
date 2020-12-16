@@ -131,8 +131,6 @@ public class StreamActivity extends AppCompatActivity implements View.OnClickLis
 
         BUSUtil.BUS.register(this);
 
-        notifyAboutColorChange();
-
         // 动态获取camera和audio权限
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PERMISSION_GRANTED) {
@@ -262,21 +260,6 @@ public class StreamActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             textRecordTick.setVisibility(View.INVISIBLE);
             textRecordTick.removeCallbacks(mRecordTickRunnable);
-        }
-    }
-
-    /*
-     * 显示key有效期
-     * */
-    private void notifyAboutColorChange() {
-        ImageView iv = findViewById(R.id.toolbar_about);
-
-        if (EasyApplication.activeDays >= 9999) {
-            iv.setImageResource(R.drawable.green);
-        } else if (EasyApplication.activeDays > 0) {
-            iv.setImageResource(R.drawable.yellow);
-        } else {
-            iv.setImageResource(R.drawable.red);
         }
     }
 

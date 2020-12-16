@@ -5,7 +5,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.res.AssetManager;
 import android.os.Build;
-import android.util.Log;
 
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
@@ -59,8 +58,8 @@ public class EasyApplication extends Application {
             }
         }
 
-        activate(BuildConfig.GBS_KEY, this);
-        activeDays = getActiveDays(this, BuildConfig.GBS_KEY);
+//        activate("", this);
+//        activeDays = getActiveDays(this, "");
 
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library

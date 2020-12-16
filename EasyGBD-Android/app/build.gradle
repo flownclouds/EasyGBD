@@ -13,18 +13,6 @@ android {
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
         flavorDimensions "versionCode"
 
-        if (project.hasProperty('GBS_KEY')) {
-            println("GBSKEY IS :" + GBS_KEY)
-            buildConfigField 'String', 'GBS_KEY', GBS_KEY
-        } else {
-            println("NO GBSKEY FOUND")
-
-            /*
-            *本Key为临时授权License，如需商业使用，请邮件至support@easydss.com了解此产品的授权信息。
-            */
-            buildConfigField 'String', 'GBS_KEY', "\"754C3273753536526D3430415A6446666F433661532B316A623230755A57467A655764696379356B5A585A705932572B567778576F50394C346B566863336C4559584A33615735555A57467453584E55614756435A584E30497A49774D546B355A57467A65513D3D\""
-        }
-
         ndk {
             //设置支持的SO库架构
             abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64'
