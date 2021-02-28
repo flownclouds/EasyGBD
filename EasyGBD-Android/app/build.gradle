@@ -8,8 +8,8 @@ android {
         applicationId "com.easygbs.device"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 10201210
-        versionName '1.0.20.1210'
+        versionCode 10210226
+        versionName '1.0.21.0226'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
         flavorDimensions "versionCode"
 

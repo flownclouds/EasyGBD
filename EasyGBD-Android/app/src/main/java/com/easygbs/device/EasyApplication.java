@@ -58,8 +58,9 @@ public class EasyApplication extends Application {
             }
         }
 
-//        activate("", this);
-//        activeDays = getActiveDays(this, "");
+        String key = "754C3273753536526D3430414F6A68676E386646772B316A623230755A57467A655764696379356B5A585A7059325570567778576F502F44346B566863336C4559584A33615735555A57467453584E55614756435A584E30497A49774D546B355A57467A65513D3D";
+        activate(key, this);
+        activeDays = getActiveDays(this, key);
 
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
