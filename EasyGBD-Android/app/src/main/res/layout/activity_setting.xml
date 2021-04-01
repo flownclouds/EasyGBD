@@ -191,32 +191,6 @@
                             android:gravity="center"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="SIP用户认证ID:"/>
-
-                        <EditText
-                            android:id="@+id/sip_channel_id"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:textColor="#4c4c4c"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="36dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:paddingLeft="5dp"
-                            android:paddingRight="5dp"
                             android:text="SIP用户认证密码:"/>
 
                         <EditText

@@ -59,7 +59,6 @@ public class SettingActivity extends AppCompatActivity implements Toolbar.OnMenu
         binding.sipServerId.setText(sip.getServerId());
         binding.sipServerDomain.setText(sip.getServerDomain());
         binding.sipDeviceId.setText(sip.getDeviceId());
-        binding.sipChannelId.setText(sip.getChannelId());
         binding.sipPassword.setText(sip.getPassword());
         binding.sipRegExpires.setText(String.valueOf(sip.getRegExpires()));
         binding.sipHeartbeatInterval.setText(String.valueOf(sip.getHeartbeatInterval()));
@@ -212,7 +211,6 @@ public class SettingActivity extends AppCompatActivity implements Toolbar.OnMenu
         sip.setServerId(binding.sipServerId.getText().toString());
         sip.setServerDomain(binding.sipServerDomain.getText().toString());
         sip.setDeviceId(binding.sipDeviceId.getText().toString());
-        sip.setChannelId(binding.sipChannelId.getText().toString());
         sip.setPassword(binding.sipPassword.getText().toString());
         sip.setServerPort(Integer.parseInt(binding.sipServerPort.getText().toString()));
         sip.setRegExpires(Integer.parseInt(binding.sipRegExpires.getText().toString()));

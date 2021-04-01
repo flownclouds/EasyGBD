@@ -46,9 +46,9 @@ public class Device implements Pusher {
 
     public native static int activate(String key, Context context);
 
-    public native int setVideoFormat(int codec, int width, int height, int frameRate);
+    public native int setVideoFormat(int channelId, int codec, int width, int height, int frameRate);
 
-    public native int setAudioFormat(int codec, int sampleRate, int channels, int bitPerSamples);
+    public native int setAudioFormat(int channelId, int codec, int sampleRate, int channels, int bitPerSamples);
 
     /**
      * 创建链接
@@ -58,7 +58,7 @@ public class Device implements Pusher {
      * @param serverId          SIP服务器ID
      * @param serverDomain      SIP服务器域
      * @param deviceId          SIP用户名
-     * @param channelId         SIP用户认证ID
+     * @param channelNum        xxx
      * @param password          SIP用户认证密码
      * @param protocol          0:udp，1:tcp
      * @param regExpires        注册有效期
@@ -66,8 +66,11 @@ public class Device implements Pusher {
      * @param heartbeatCount    最大心跳超时次数
      */
     public native int create(String serverIp, int serverPort, String serverId, String serverDomain,
-                             String deviceId, String channelId, String password, int protocol,
+                             String deviceId, int channelNum, String password, int protocol,
                              int regExpires, int heartbeatInterval, int heartbeatCount);
+
+    public native int addChannelInfo(int channelId, String indexCode, String name, String manufacturer, String model,
+                                     String parentID, String owner, String civilCode, String address, double longitude, double latitude);
 
     /**
      * pushVideo
@@ -76,9 +79,9 @@ public class Device implements Pusher {
      * @param frameSize
      * @param keyframe  关键帧1 其他0
      */
-    public native int pushVideo(byte[] buffer, int frameSize, int keyframe);
+    public native int pushVideo(int channelId, byte[] buffer, int frameSize, int keyframe);
 
-    public native int pushAudio(int format, byte[] buffer, int frameSize, int nbSamples);
+    public native int pushAudio(int channelId, int format, byte[] buffer, int frameSize, int nbSamples);
 
     public native int release();
 
@@ -91,20 +94,38 @@ public class Device implements Pusher {
         ip = sip.getServerIp();
         port = sip.getServerPort();
 
+        int size = sip.getList().size();
+
         create(sip.getServerIp(),
                 sip.getServerPort(),
                 sip.getServerId(),
                 sip.getServerDomain(),
                 sip.getDeviceId(),
-                sip.getChannelId(),
+                size,
                 sip.getPassword(),
                 sip.getProtocol(),
                 sip.getRegExpires(),
                 sip.getHeartbeatInterval(),
                 sip.getHeartbeatCount());
 
-        setVideoFormat(videoCodec, width, height, frameRate);
-        setAudioFormat(audioCodec, sampleRate, channels, bitPerSamples);
+        for (int i = 0; i < size; i++) {
+            SIP.GB28181_CHANNEL_INFO_T item = sip.getList().get(i);
+
+            addChannelInfo(i,
+                    item.getIndexCode(),
+                    item.getName(),
+                    item.getManufacturer(),
+                    item.getModel(),
+                    item.getParentId(),
+                    item.getOwner(),
+                    item.getCivilCode(),
+                    item.getAddress(),
+                    item.getLongitude(),
+                    item.getLatitude());
+
+            setVideoFormat(i, videoCodec, width, height, frameRate);
+            setAudioFormat(i, audioCodec, sampleRate, channels, bitPerSamples);
+        }
 
         pushed = true;
     }
@@ -128,7 +149,9 @@ public class Device implements Pusher {
     @Override
     public void pushV(byte[] buffer, int length, int keyframe) {
         if (pushed) {
-            int res = pushVideo(buffer, length, keyframe);
+
+            // TODO channelId是按通道来的：0，1...7  现在写死0 只有一路通道
+            int res = pushVideo(0, buffer, length, keyframe);
             Log.i("AAA", "Video：" + res + " >>> " + length);
         }
     }
@@ -136,7 +159,9 @@ public class Device implements Pusher {
     @Override
     public void pushA(byte[] buffer, int length, int nbSamples) {
         if (pushed) {
-            int res = pushAudio(AUDIO_CODEC_PCM, buffer, length, length);
+
+            // TODO channelId是按通道来的：0，1...7  现在写死0 只有一路通道
+            int res = pushAudio(0, AUDIO_CODEC_PCM, buffer, length, length);
             Log.i("AAA", "Audio：" + res + " >>> " + length);
         }
     }
@@ -154,11 +179,12 @@ public class Device implements Pusher {
      * 回调函数
      *
      * @param prt
+     * @param channelId
      * @param eventType
      * @param param
      * @param paramLength
      */
-    public static void OnGB28181DeviceCALLBACK(int prt, int eventType, byte[] param, int paramLength) {
+    public static void OnGB28181DeviceCALLBACK(int prt, int channelId, int eventType, byte[] param, int paramLength) {
         if (callback != null) {
             callback.onCallback(eventType, OnInitPusherCallback.CODE.getName(eventType));
         }
