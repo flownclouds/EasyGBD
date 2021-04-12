@@ -24,13 +24,14 @@ import java.util.Set;
 
 /**
  * AudioRecord音频采集、MediaCodec硬编码
- * */
+ */
 public class AudioStream {
     private static final String TAG = "AudioStream";
 
     private static AudioStream _this;
 
     private final Context context;
+    private boolean aac;
 
     EasyMuxer muxer;
 
@@ -100,6 +101,8 @@ public class AudioStream {
      * 添加推流器
      * */
     public void addPusher(Pusher pusher) {
+        aac = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("key-aac-codec", false);
+
         boolean shouldStart = false;
 
         synchronized (this) {
@@ -108,8 +111,7 @@ public class AudioStream {
             }
 
             if (pusher != null) {
-                boolean key = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("key-aac-codec", false);
-                if (key) {
+                if (aac) {
                     pusher.setAFormat(Device.AUDIO_CODEC_AAC, samplingRate, 1, 16);
                 } else {
                     pusher.setAFormat(Device.AUDIO_CODEC_G711U, samplingRate, 1, 16);
@@ -126,7 +128,7 @@ public class AudioStream {
     /*
      * 删除推流器
      * */
-    public void removePusher(Pusher pusher){
+    public void removePusher(Pusher pusher) {
         boolean shouldStop = false;
 
         synchronized (this) {
@@ -219,22 +221,6 @@ public class AudioStream {
                     // 2、开始采集
                     mAudioRecord.startRecording();
 
-//                    while (mThread != null) {
-//                        byte[] bytes = new byte[bufferSize];
-//                        mAudioRecord.read(bytes, 0, bytes.length);
-//
-//                        Collection<Pusher> p;
-//                        synchronized (AudioStream.this) {
-//                            p = sets;
-//                        }
-//                        Iterator<Pusher> it = p.iterator();
-//                        // 推流
-//                        while (it.hasNext()) {
-//                            Pusher ps = it.next();
-//                            ps.pushA(bytes, bytes.length, samplingRate);
-//                        }
-//                    }
-
                     // 获取编码器的输入缓存inputBuffers
                     final ByteBuffer[] inputBuffers = mMediaCodec.getInputBuffers();
 
@@ -255,20 +241,22 @@ public class AudioStream {
                              *  */
                             len = mAudioRecord.read(inputBuffers[bufferIndex], BUFFER_SIZE);
 
-                            Collection<Pusher> p;
-                            synchronized (AudioStream.this) {
-                                p = sets;
-                            }
-                            Iterator<Pusher> it = p.iterator();
-                            // 推流
-                            while (it.hasNext()) {
-                                Pusher ps = it.next();
+                            if (!aac) {
+                                Collection<Pusher> p;
+                                synchronized (AudioStream.this) {
+                                    p = sets;
+                                }
+                                Iterator<Pusher> it = p.iterator();
+                                // 推流
+                                while (it.hasNext()) {
+                                    Pusher ps = it.next();
 
-                                byte[] bytes = new byte[bufferSize];
-                                inputBuffers[bufferIndex].clear();
-                                inputBuffers[bufferIndex].get(bytes);
+                                    byte[] bytes = new byte[bufferSize];
+                                    inputBuffers[bufferIndex].clear();
+                                    inputBuffers[bufferIndex].get(bytes);
 
-                                ps.pushA(bytes, bytes.length, samplingRate);
+                                    ps.pushA(aac, bytes, bytes.length, (int) presentationTimeUs);
+                                }
                             }
 
                             long timeUs = System.nanoTime() / 1000;
@@ -323,7 +311,7 @@ public class AudioStream {
 
     /**
      * 不断的从输出缓存中取出编码后的数据，然后push出去
-     * */
+     */
     private class WriterThread extends Thread {
         public WriterThread() {
             super("WriteAudio");
@@ -372,23 +360,22 @@ public class AudioStream {
                     mBuffer.position(7 + mBufferInfo.size);
                     addADTStoPacket(mBuffer.array(), mBufferInfo.size + 7);
                     mBuffer.flip();
-//                    Collection<Pusher> p;
-//
-//                    synchronized (AudioStream.this) {
-//                        p = sets;
-//                    }
-//
-//                    Iterator<Pusher> it = p.iterator();
-//
-//                    // 推流
-//                    while (it.hasNext()) {
-//                        Pusher ps = it.next();
-//                        ps.push(mBuffer.array(),
-//                                0,
-//                                mBufferInfo.size + 7,
-//                                0,// mBufferInfo.presentationTimeUs / 1000,
-//                                0);
-//                    }
+
+                    if (aac) {
+                        Collection<Pusher> p;
+                        synchronized (AudioStream.this) {
+                            p = sets;
+                        }
+                        Iterator<Pusher> it = p.iterator();
+                        // 推流
+                        while (it.hasNext()) {
+                            Pusher ps = it.next();
+                            ps.pushA(aac,
+                                    mBuffer.array(),
+                                    mBufferInfo.size + 7,
+                                    (int) (mBufferInfo.presentationTimeUs / 1000));
+                        }
+                    }
 
                     // 处理完上面的步骤后再将该buffer放回到output缓冲区队列
                     mMediaCodec.releaseOutputBuffer(index, false);

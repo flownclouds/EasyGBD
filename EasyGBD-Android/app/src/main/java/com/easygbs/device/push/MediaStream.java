@@ -137,7 +137,7 @@ public class MediaStream {
         mSWCodec = SPUtil.getswCodec(context);
         mHevc = SPUtil.getHevcCodec(context);
 
-        mEasyPusher = new Device();
+        mEasyPusher = new Device(context);
         ((Device) mEasyPusher).setCallback(new Device.OnInitPusherCallback() {
             @Override
             public void onCallback(int code, String name) {

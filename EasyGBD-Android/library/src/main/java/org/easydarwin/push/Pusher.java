@@ -14,8 +14,10 @@ public interface Pusher {
     void initPush(SIP sip);
 
     void setVFormat(int codec, int width, int height, int frameRate);
+
     void setAFormat(int codec, int sampleRate, int channels, int bitPerSamples);
 
     void pushV(byte[] buffer, int length, int keyframe);
-    void pushA(byte[] buffer, int length, int nbSamples);
+
+    void pushA(boolean isAac, byte[] buffer, int length, int nbSamples);
 }

@@ -1,6 +1,7 @@
 package com.easygbs;
 
 import android.content.Context;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import org.easydarwin.push.Pusher;
@@ -10,6 +11,7 @@ public class Device implements Pusher {
 
     private static String ip;
     private static int port;
+    private static Context context;
 
     public static final int VIDEO_CODEC_NONE = 0;
     public static final int VIDEO_CODEC_H264 = 1;
@@ -37,6 +39,10 @@ public class Device implements Pusher {
     private int sampleRate;
     private int channels;
     private int bitPerSamples;
+
+    public Device(Context c) {
+        context = c;
+    }
 
     static {
         System.loadLibrary("EasyGBSDevice");
@@ -149,7 +155,6 @@ public class Device implements Pusher {
     @Override
     public void pushV(byte[] buffer, int length, int keyframe) {
         if (pushed) {
-
             // TODO channelId是按通道来的：0，1...7  现在写死0 只有一路通道
             int res = pushVideo(0, buffer, length, keyframe);
             Log.i("AAA", "Video：" + res + " >>> " + length);
@@ -157,11 +162,16 @@ public class Device implements Pusher {
     }
 
     @Override
-    public void pushA(byte[] buffer, int length, int nbSamples) {
+    public void pushA(boolean isAac, byte[] buffer, int length, int nbSamples) {
         if (pushed) {
-
             // TODO channelId是按通道来的：0，1...7  现在写死0 只有一路通道
-            int res = pushAudio(0, AUDIO_CODEC_PCM, buffer, length, length);
+
+            int res;
+            if (isAac) {
+                res = pushAudio(0, AUDIO_CODEC_AAC, buffer, length, length);
+            } else {
+                res = pushAudio(0, AUDIO_CODEC_PCM, buffer, length, length);
+            }
             Log.i("AAA", "Audio：" + res + " >>> " + length);
         }
     }
@@ -219,7 +229,11 @@ public class Device implements Pusher {
                         res = "注册鉴权失败：" + ip + ":" + port;
                         break;
                     case GB28181_DEVICE_EVENT_START_VIDEO:
-                        res = "开始视频：H264+G711U";
+                        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("key-aac-codec", false)) {
+                            res = "开始视频：H264+AAC";
+                        } else {
+                            res = "开始视频：H264+G711U";
+                        }
                         break;
                     case GB28181_DEVICE_EVENT_STOP_VIDEO:
                         res = "停止视频";
