@@ -60,7 +60,7 @@
                             android:gravity="center"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="SIP服务器地址:"/>
+                            android:text="SIP服务器地址:" />
 
                         <EditText
                             android:id="@+id/sip_server_ip"
@@ -86,7 +86,7 @@
                             android:gravity="center"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="SIP服务器端口:"/>
+                            android:text="SIP服务器端口:" />
 
                         <EditText
                             android:id="@+id/sip_server_port"
@@ -94,8 +94,8 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:text=""
                             android:inputType="number"
+                            android:text=""
                             android:textColor="#4c4c4c"
                             android:textSize="12sp" />
 
@@ -113,7 +113,34 @@
                             android:gravity="center"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="SIP服务器ID:"/>
+                            android:text="本地SIP端口:" />
+
+                        <EditText
+                            android:id="@+id/local_sip_port"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:inputType="number"
+                            android:text=""
+                            android:textColor="#4c4c4c"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="SIP服务器ID:" />
 
                         <EditText
                             android:id="@+id/sip_server_id"
@@ -139,7 +166,7 @@
                             android:gravity="center"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="SIP服务器域:"/>
+                            android:text="SIP服务器域:" />
 
                         <EditText
                             android:id="@+id/sip_server_domain"
@@ -165,7 +192,7 @@
                             android:gravity="center"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="SIP用户名:"/>
+                            android:text="SIP用户名:" />
 
                         <EditText
                             android:id="@+id/sip_device_id"
@@ -191,7 +218,7 @@
                             android:gravity="center"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="SIP用户认证密码:"/>
+                            android:text="SIP用户认证密码:" />
 
                         <EditText
                             android:id="@+id/sip_password"
@@ -209,7 +236,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="36dp"
                         android:gravity="center"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -217,7 +245,7 @@
                             android:gravity="center"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="传输协议:"/>
+                            android:text="传输协议:" />
 
                         <RadioGroup
                             android:id="@+id/sip_protocol"
@@ -257,7 +285,7 @@
                             android:gravity="center"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="注册有效期:"/>
+                            android:text="注册有效期:" />
 
                         <EditText
                             android:id="@+id/sip_reg_expires"
@@ -265,8 +293,8 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:text=""
                             android:inputType="number"
+                            android:text=""
                             android:textColor="#4c4c4c"
                             android:textSize="12sp" />
 
@@ -276,7 +304,7 @@
                             android:gravity="center"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="秒"/>
+                            android:text="秒" />
 
                     </LinearLayout>
 
@@ -292,7 +320,7 @@
                             android:gravity="center"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="心跳周期:"/>
+                            android:text="心跳周期:" />
 
                         <EditText
                             android:id="@+id/sip_heartbeat_interval"
@@ -300,8 +328,8 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:text=""
                             android:inputType="number"
+                            android:text=""
                             android:textColor="#4c4c4c"
                             android:textSize="12sp" />
 
@@ -311,7 +339,7 @@
                             android:gravity="center"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="秒"/>
+                            android:text="秒" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -326,7 +354,7 @@
                             android:gravity="center"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
-                            android:text="最大心跳超时次数:"/>
+                            android:text="最大心跳超时次数:" />
 
                         <EditText
                             android:id="@+id/sip_heartbeat_count"
@@ -334,8 +362,8 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:text=""
                             android:inputType="number"
+                            android:text=""
                             android:textColor="#4c4c4c"
                             android:textSize="12sp" />
 
@@ -344,46 +372,46 @@
                 </LinearLayout>
 
                 <!--<CheckBox-->
-                    <!--android:id="@+id/enable_background_camera_pushing"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginTop="8dp"-->
-                    <!--android:checked="false"-->
-                    <!--android:text="使能摄像头后台采集" />-->
+                <!--android:id="@+id/enable_background_camera_pushing"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:checked="false"-->
+                <!--android:text="使能摄像头后台采集" />-->
 
                 <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:layout_marginVertical="5dp"-->
-                    <!--android:background="?android:attr/listDivider" />-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginVertical="5dp"-->
+                <!--android:background="?android:attr/listDivider" />-->
 
                 <!--<TextView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:paddingLeft="5dp"-->
-                    <!--android:paddingRight="5dp"-->
-                    <!--android:text="EasyGBS默认使用H.264格式来编码视频。如果需要使用H.265，请勾选下面的单选框。\n注：H.265可能在某些设备上不支持，这种情况下会自动切换为H.264格式" />-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:paddingRight="5dp"-->
+                <!--android:text="EasyGBS默认使用H.264格式来编码视频。如果需要使用H.265，请勾选下面的单选框。\n注：H.265可能在某些设备上不支持，这种情况下会自动切换为H.264格式" />-->
 
                 <!--<CheckBox-->
-                    <!--android:id="@+id/enable_hevc"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginBottom="8dp"-->
-                    <!--android:checked="false"-->
-                    <!--android:text="使能H.265编码" />-->
+                <!--android:id="@+id/enable_hevc"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:checked="false"-->
+                <!--android:text="使能H.265编码" />-->
 
                 <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:layout_marginVertical="5dp"-->
-                    <!--android:background="?android:attr/listDivider" />-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginVertical="5dp"-->
+                <!--android:background="?android:attr/listDivider" />-->
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
-                    android:layout_marginTop="20dp"
                     android:text="EasyGBS默认使用G.711编码推送音频。如果需要测试AAC编码，请勾选下面的单选框。" />
 
                 <CheckBox

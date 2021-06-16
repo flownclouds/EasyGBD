@@ -35,7 +35,7 @@ import org.easydarwin.util.SIP;
 
 /**
  * 设置页
- * */
+ */
 public class SettingActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener {
 
     public static final int REQUEST_OVERLAY_PERMISSION = 1004;  // 悬浮框
@@ -56,6 +56,7 @@ public class SettingActivity extends AppCompatActivity implements Toolbar.OnMenu
         SIP sip = DataUtil.getSIP();
         binding.sipServerIp.setText(sip.getServerIp());
         binding.sipServerPort.setText(String.valueOf(sip.getServerPort()));
+        binding.localSipPort.setText(String.valueOf(sip.getLocalSipPort()));
         binding.sipServerId.setText(sip.getServerId());
         binding.sipServerDomain.setText(sip.getServerDomain());
         binding.sipDeviceId.setText(sip.getDeviceId());
@@ -179,7 +180,7 @@ public class SettingActivity extends AppCompatActivity implements Toolbar.OnMenu
 
         int bitrate_added_kbps = SPUtil.getBitrateKbps(this);
         int kbps = 72000 + bitrate_added_kbps;
-        bitrateValue.setText(kbps/1000 + "kbps");
+        bitrateValue.setText(kbps / 1000 + "kbps");
 
         sb.setMax(5000000);
         sb.setProgress(bitrate_added_kbps);
@@ -187,7 +188,7 @@ public class SettingActivity extends AppCompatActivity implements Toolbar.OnMenu
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 int kbps = 72000 + progress;
-                bitrateValue.setText(kbps/1000 + "kbps");
+                bitrateValue.setText(kbps / 1000 + "kbps");
             }
 
             @Override
@@ -213,6 +214,7 @@ public class SettingActivity extends AppCompatActivity implements Toolbar.OnMenu
         sip.setDeviceId(binding.sipDeviceId.getText().toString());
         sip.setPassword(binding.sipPassword.getText().toString());
         sip.setServerPort(Integer.parseInt(binding.sipServerPort.getText().toString()));
+        sip.setLocalSipPort(Integer.parseInt(binding.localSipPort.getText().toString()));
         sip.setRegExpires(Integer.parseInt(binding.sipRegExpires.getText().toString()));
         sip.setHeartbeatInterval(Integer.parseInt(binding.sipHeartbeatInterval.getText().toString()));
         sip.setHeartbeatCount(Integer.parseInt(binding.sipHeartbeatCount.getText().toString()));
@@ -226,9 +228,9 @@ public class SettingActivity extends AppCompatActivity implements Toolbar.OnMenu
         DataUtil.setSIP(sip);
     }
 
-    /*
-    * 本地录像
-    * */
+    /**
+     * 本地录像
+     */
     public void onOpenLocalRecord(View view) {
         Intent intent = new Intent(this, MediaFilesActivity.class);
         startActivityForResult(intent, 0);

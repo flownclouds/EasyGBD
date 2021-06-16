@@ -18,6 +18,7 @@ public class DataUtil {
                 .edit()
                 .putString("serverIp", sip.getServerIp())
                 .putInt("serverPort", sip.getServerPort())
+                .putInt("localSipPort", sip.getLocalSipPort())
                 .putString("serverId", sip.getServerId())
                 .putString("serverDomain", sip.getServerDomain())
                 .putString("deviceId", sip.getDeviceId())
@@ -35,11 +36,12 @@ public class DataUtil {
         SIP sip = new SIP();
         sip.setServerIp(sp.getString("serverIp", "demo.easygbs.com"));
         sip.setServerPort(sp.getInt("serverPort", 15060));
+        sip.setLocalSipPort(sp.getInt("localSipPort", 15060));
         sip.setServerId(sp.getString("serverId", "34020000002000000001"));
         sip.setServerDomain(sp.getString("serverDomain", "3402000000"));
         sip.setDeviceId(sp.getString("deviceId", "34020000001110005555"));
         sip.setPassword(sp.getString("password", "12345678"));
-        sip.setProtocol(sp.getInt("protocol", 0));
+        sip.setProtocol(sp.getInt("protocol", SIP.ProtocolEnum.UDP.getValue()));
         sip.setRegExpires(sp.getInt("regExpires", 3600));
         sip.setHeartbeatInterval(sp.getInt("heartbeatInterval", 30));
         sip.setHeartbeatCount(sp.getInt("heartbeatCount", 3));

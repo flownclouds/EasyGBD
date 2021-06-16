@@ -72,7 +72,7 @@ public class Device implements Pusher {
      * @param heartbeatCount    最大心跳超时次数
      */
     public native int create(String serverIp, int serverPort, String serverId, String serverDomain,
-                             String deviceId, int channelNum, String password, int protocol,
+                             String deviceId, int localSipPort, int channelNum, String password, int protocol,
                              int regExpires, int heartbeatInterval, int heartbeatCount);
 
     public native int addChannelInfo(int channelId, String indexCode, String name, String manufacturer, String model,
@@ -107,6 +107,7 @@ public class Device implements Pusher {
                 sip.getServerId(),
                 sip.getServerDomain(),
                 sip.getDeviceId(),
+                sip.getLocalSipPort(),
                 size,
                 sip.getPassword(),
                 sip.getProtocol(),

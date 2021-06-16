@@ -12,6 +12,7 @@ public class SIP {
      * SIP服务器端口
      */
     private int serverPort;
+    private int localSipPort;
     /**
      * SIP服务器ID
      */
@@ -44,6 +45,14 @@ public class SIP {
      * 最大心跳超时次数
      */
     private int heartbeatCount;
+
+    public int getLocalSipPort() {
+        return localSipPort;
+    }
+
+    public void setLocalSipPort(int localSipPort) {
+        this.localSipPort = localSipPort;
+    }
 
     private List<GB28181_CHANNEL_INFO_T> list;
 
